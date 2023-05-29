@@ -1,0 +1,22 @@
+version: "3"
+services:
+    rabbitmq:   
+        container_name: myrabbit
+        ports:
+            - 15672:15672
+            - 5672:5672
+        networks:
+          - rabbitmq    
+        restart: always
+        volumes:
+            - /etc/localtime:/etc/localtime
+            - $PWD/myrabbit/rabbitmq:/var/lib/rabbitmq
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=123456
+        image: myrabbitmq:3.8-management 
+
+networks:
+  rabbitmq:
+    name: rabbitmq
+    driver: bridge
